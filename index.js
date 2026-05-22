@@ -23,44 +23,60 @@ del.addEventListener("click", () => {
     let long = content.length;
     let result = content.substring(0, long - 1);
     visor.innerHTML = result;
-})
+});
 
 num9.addEventListener("click", () => {
     visor.innerHTML += 9;
-})
+});
 
 num8.addEventListener("click", () => {
     visor.innerHTML += 8;
-})
+});
 
 num7.addEventListener("click", () => {
     visor.innerHTML += 7;
-})
+});
 
 num6.addEventListener("click", () => {
     visor.innerHTML += 6;
-})
+});
 
 num5.addEventListener("click", () => {
     visor.innerHTML += 5;
-})
+});
 
 num4.addEventListener("click", () => {
     visor.innerHTML += 4;
-})
+});
 
 num3.addEventListener("click", () => {
     visor.innerHTML += 3;
-})
+});
 
 num2.addEventListener("click", () => {
     visor.innerHTML += 2;
-})
+});
 
 num1.addEventListener("click", () => {
     visor.innerHTML += 1;
-})
+});
 
 num0.addEventListener("click", () => {
     visor.innerHTML += 0;
+});
+
+suma.addEventListener("click", () => {
+    visor.innerHTML += "+";
+});
+
+resta.addEventListener("click", () => {
+    visor.innerHTML += "-";
+});
+
+mult.addEventListener("click", () => {
+    visor.innerHTML += "x";
+});
+
+div.addEventListener("click", () => {
+    visor.innerHTML += "/";
 })
