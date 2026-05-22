@@ -16,8 +16,6 @@ const mult = document.getElementById("x");
 const div = document.getElementById("/");
 const result = document.getElementById("=");
 
-console.log(visor.innerHTML);
-
 del.addEventListener("click", () => {
     let content = visor.innerText;
     let long = content.length;
@@ -80,3 +78,68 @@ mult.addEventListener("click", () => {
 div.addEventListener("click", () => {
     visor.innerHTML += "/";
 })
+
+result.addEventListener("click", () => {
+    let content = visor.innerText;
+    console.log(content)
+    let arrayNum = content.split(/[+x/-]/)
+    console.log(arrayNum);
+    
+    let arrayOp = obtenerArrayOp(content);
+    console.log(arrayOp);
+
+    let arrayResult = [];
+    arrayResult = acomodarOp(arrayNum, arrayOp);
+})
+
+function obtenerArrayOp(content) {
+    let arrayOp = [];
+    for (let c of content) {
+        if (c == "+") {
+            arrayOp.push(c);
+        } else if (c == "-") {
+            arrayOp.push(c);
+        } else if (c == "x") {
+            arrayOp.push(c);
+        } else if (c == "/") {
+            arrayOp.push(c);
+        }
+    }
+    return arrayOp;
+}
+
+function acomodarOp(arrayNum, arrayOp) {
+    let sortNum = [];
+    let indexNum = [];
+    let sortOp = []
+
+    for (let index in arrayOp) {
+        if (arrayOp[index] == "x" || arrayOp[index == "/"]) {
+            sortOp.push(arrayOp[index]);
+            if (indexNum.includes(index)) {
+                sortNum.push(arrayNum[index + 1]);
+                indexNum.push(index + 1);
+            } else {
+                sortNum.push(arrayNum[index]);
+                sortNum.push(arrayNum[index + 1]);
+                indexNum.push(index);
+                indexNum.push(index + 1);
+            }
+        }
+    }
+
+    for (let index in arrayOp) {
+        if (arrayOp[index] != "x" || arrayOp[index] != "/") {
+            sortOp.push(arrayOp[index]);
+        }
+    }
+
+    for (let index in arrayNum) {
+        if (indexNum.includes(index) == false) {
+            sortNum.push(arrayNum[index]);
+        }
+    }
+    console.log(sortNum);
+    console.log(sortOp);
+    return [sortOp, sortNum];
+}
