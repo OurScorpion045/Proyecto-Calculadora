@@ -114,22 +114,22 @@ function acomodarOp(arrayNum, arrayOp) {
     let sortOp = []
 
     for (let index in arrayOp) {
-        if (arrayOp[index] == "x" || arrayOp[index == "/"]) {
+        if (arrayOp[index] == "x" || arrayOp[index] == "/") {
             sortOp.push(arrayOp[index]);
             if (indexNum.includes(index)) {
-                sortNum.push(arrayNum[index + 1]);
-                indexNum.push(index + 1);
+                sortNum.push(arrayNum[String(+index + 1)]);
+                indexNum.push(String(+index + 1));
             } else {
                 sortNum.push(arrayNum[index]);
-                sortNum.push(arrayNum[index + 1]);
+                sortNum.push(arrayNum[String(+index + 1)]);
                 indexNum.push(index);
-                indexNum.push(index + 1);
+                indexNum.push(String(+index + 1));
             }
         }
     }
 
     for (let index in arrayOp) {
-        if (arrayOp[index] != "x" || arrayOp[index] != "/") {
+        if (arrayOp[index] != "x" && arrayOp[index] != "/") {
             sortOp.push(arrayOp[index]);
         }
     }
