@@ -109,6 +109,7 @@ function obtenerArrayOp(content) {
 }
 
 function realizarOp(arrayNum, arrayOp) {
+    let deletedOp = [];
     for (let index in arrayNum) {
         arrayNum[index] = parseInt(arrayNum[index]);
     }
@@ -119,31 +120,46 @@ function realizarOp(arrayNum, arrayOp) {
             let result = arrayNum[index] * arrayNum[String(+index + 1)];
             console.log(`Resultado de la mult: ${result}`);
             arrayNum.splice(index,2,result);
-            arrayOp.splice(index,1);
+            deletedOp.push(index);
             console.log(`arrayNum: ${arrayNum}`);
-        } else if (arrayOp[index == "/"]) {
+            console.log(`arrayOp: ${arrayOp}`);
+        } else if (arrayOp[index] == "/") {
             let result = arrayNum[index] / arrayNum[String(+index + 1)];
             console.log(`Resultado de la div: ${result}`);
             arrayNum.splice(index,2,result);
-            arrayOp.splice(index,1);
+            deletedOp.push(index);
             console.log(`arrayNum: ${arrayNum}`);
+            console.log(`arrayOp: ${arrayOp}`);
         }
+
+        for (let index in deletedOp) {
+            arrayOp.splice(index,1);
+        }
+        deletedOp = [];
     }
+
 
     for (let index in arrayOp) {
         if (arrayOp[index] == "+") {
             let result = arrayNum[index] + arrayNum[String(+index + 1)];
             console.log(`Resultado de la suma: ${result}`);
             arrayNum.splice(index,2,result);
-            arrayOp.splice(index,1);
             console.log(`arrayNum: ${arrayNum}`);
+            console.log(`arrayOp: ${arrayOp}`);
+            deletedOp.push(index);
         } else if (arrayOp[index] == "-") {
             let result = arrayNum[index] - arrayNum[String(+index + 1)];
             console.log(`Resultado de la resta: ${result}`);
             arrayNum.splice(index,2,result);
-            arrayOp.splice(index,1);
             console.log(`arrayNum: ${arrayNum}`);
+            console.log(`arrayOp: ${arrayOp}`);
+            deletedOp.push(index);
         }
+
+        for (let index in deletedOp) {
+            arrayOp.splice(index,1);
+        }
+        deletedOp = [];
     }
 
     if (arrayOp.length > 0) {
