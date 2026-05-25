@@ -1,5 +1,6 @@
 const visor = document.getElementById("visor");
-const del = document.getElementById("del")
+const del = document.getElementById("del");
+const c = document.getElementById("c");
 const num9 = document.getElementById("9");
 const num8 = document.getElementById("8");
 const num7 = document.getElementById("7");
@@ -22,6 +23,10 @@ del.addEventListener("click", () => {
     let result = content.substring(0, long - 1);
     visor.innerHTML = result;
 });
+
+c.addEventListener("click", () => {
+    visor.innerHTML = "";
+})
 
 num9.addEventListener("click", () => {
     visor.innerHTML += 9;
@@ -81,12 +86,9 @@ div.addEventListener("click", () => {
 
 result.addEventListener("click", () => {
     let content = visor.innerText;
-    console.log(content)
     let arrayNum = content.split(/[+x/-]/)
-    console.log(arrayNum);
     
     let arrayOp = obtenerArrayOp(content);
-    console.log(arrayOp);
 
     let result = realizarOp(arrayNum, arrayOp);
     visor.innerHTML = result;
@@ -114,24 +116,18 @@ function realizarOp(arrayNum, arrayOp) {
     for (let index in arrayNum) {
         arrayNum[index] = parseFloat(arrayNum[index]);
     }
-    console.log(`Array convertido a float: ${arrayNum}`);
 
     for (let index in arrayOp) {
         if (arrayOp[index] == "x") {
             index = index - cont;
-            console.log(`Indice modificado: ${index}`)
             let result = arrayNum[index] * arrayNum[String(+index + 1)];
-            console.log(`Resultado de la mult: ${result}`);
             arrayNum.splice(index,2,result);
             cont += 1;
-            console.log(`arrayNum: ${arrayNum}`);
         } else if (arrayOp[index] == "/") {
             index = index - cont;
             let result = arrayNum[index] / arrayNum[String(+index + 1)];
-            console.log(`Resultado de la div: ${result}`);
             arrayNum.splice(index,2,result);
             cont += 1;
-            console.log(`arrayNum: ${arrayNum}`);
         }
     }
     cont = 0;
@@ -146,20 +142,15 @@ function realizarOp(arrayNum, arrayOp) {
         if (arrayOpMinor[index] == "+") {
             index = index - cont;
             let result = arrayNum[index] + arrayNum[String(+index + 1)];
-            console.log(`Resultado de la suma: ${result}`);
             arrayNum.splice(index,2,result);
             cont += 1;
-            console.log(`arrayNum: ${arrayNum}`);
         } else if (arrayOpMinor[index] == "-") {
             index = index - cont;
             let result = arrayNum[index] - arrayNum[String(+index + 1)];
-            console.log(`Resultado de la resta: ${result}`);
             arrayNum.splice(index,2,result);
             cont += 1;
-            console.log(`arrayNum: ${arrayNum}`);
         }
     }
 
-    console.log(`Resultado: ${arrayNum}`);
     return String(arrayNum[0]);
 }
