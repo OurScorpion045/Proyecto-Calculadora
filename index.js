@@ -109,63 +109,57 @@ function obtenerArrayOp(content) {
 }
 
 function realizarOp(arrayNum, arrayOp) {
-    let deletedOp = [];
+    let arrayOpMinor = [];
+    let cont = 0;
     for (let index in arrayNum) {
-        arrayNum[index] = parseInt(arrayNum[index]);
+        arrayNum[index] = parseFloat(arrayNum[index]);
     }
-    console.log(`Array convertido a int: ${arrayNum}`);
+    console.log(`Array convertido a float: ${arrayNum}`);
 
     for (let index in arrayOp) {
         if (arrayOp[index] == "x") {
+            index = index - cont;
+            console.log(`Indice modificado: ${index}`)
             let result = arrayNum[index] * arrayNum[String(+index + 1)];
             console.log(`Resultado de la mult: ${result}`);
             arrayNum.splice(index,2,result);
-            deletedOp.push(index);
+            cont += 1;
             console.log(`arrayNum: ${arrayNum}`);
-            console.log(`arrayOp: ${arrayOp}`);
         } else if (arrayOp[index] == "/") {
+            index = index - cont;
             let result = arrayNum[index] / arrayNum[String(+index + 1)];
             console.log(`Resultado de la div: ${result}`);
             arrayNum.splice(index,2,result);
-            deletedOp.push(index);
+            cont += 1;
             console.log(`arrayNum: ${arrayNum}`);
-            console.log(`arrayOp: ${arrayOp}`);
         }
-
-        for (let index in deletedOp) {
-            arrayOp.splice(index,1);
+    }
+    cont = 0;
+    
+    for (let index in arrayOp) {
+        if (arrayOp[index] == "+" || arrayOp[index] == "-") {
+            arrayOpMinor.push(arrayOp[index]);
         }
-        deletedOp = [];
     }
 
-
-    for (let index in arrayOp) {
-        if (arrayOp[index] == "+") {
+    for (let index in arrayOpMinor) {
+        if (arrayOpMinor[index] == "+") {
+            index = index - cont;
             let result = arrayNum[index] + arrayNum[String(+index + 1)];
             console.log(`Resultado de la suma: ${result}`);
             arrayNum.splice(index,2,result);
+            cont += 1;
             console.log(`arrayNum: ${arrayNum}`);
-            console.log(`arrayOp: ${arrayOp}`);
-            deletedOp.push(index);
-        } else if (arrayOp[index] == "-") {
+        } else if (arrayOpMinor[index] == "-") {
+            index = index - cont;
             let result = arrayNum[index] - arrayNum[String(+index + 1)];
             console.log(`Resultado de la resta: ${result}`);
             arrayNum.splice(index,2,result);
+            cont += 1;
             console.log(`arrayNum: ${arrayNum}`);
-            console.log(`arrayOp: ${arrayOp}`);
-            deletedOp.push(index);
         }
-
-        for (let index in deletedOp) {
-            arrayOp.splice(index,1);
-        }
-        deletedOp = [];
     }
 
-    if (arrayOp.length > 0) {
-        //realizarOp(arrayNum, arrayOp);
-    } else {
-        console.log(`Resultado: ${arrayNum}`);
-        return arrayNum;
-    }
+    console.log(`Resultado: ${arrayNum}`);
+    return String(arrayNum[0]);
 }
